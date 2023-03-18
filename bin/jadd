@@ -1,9 +1,7 @@
 #!/bin/bash
 #add pdf files to data base
 ls -1 pdfs/*.pdf | sed -e s/.pdf// -e 's/pdfs\///' | sort > indx/pdfs.ind
-if test -f txts/*txt; then
-  ls -1 txts/*.txt | sed -e s/.txt// -e 's/txts\///' | sort > indx/txts.ind
-fi
-diff indx/pdfs.ind indx/txts.ind | sed -n '/^< /{s/^< //;p}' | awk '{print "echo adding pdfs/"$0".pdf to the data base; pdftotext pdfs/"$0".pdf - > txts/"$0".txt"}' | sh
+ls -1 txts/*.txt | sed -e s/.txt// -e 's/txts\///' | sort > indx/txts.ind
+diff indx/pdfs.ind indx/txts.ind | sed -n '/^< /{s/^< //;s/ /\\ /g;p}' | awk '{print "echo adding pdfs/"$0".pdf to the data base; pdftotext pdfs/"$0".pdf - > txts/"$0".txt"}' | sh
 ls -1 pdfs/*.pdf | sed -e s/.pdf// -e 's/pdfs\///' | sort > indx/pdfs.ind
 ls -1 txts/*.txt | sed -e s/.txt// -e 's/txts\///' | sort > indx/txts.ind
