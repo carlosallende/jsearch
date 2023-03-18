@@ -1,5 +1,5 @@
 # jsearch
-A bash tool for searching text pdfs
+A bash tool for searching text in pdfs
 
 1. to add files copy them to the folder pdfs and execute
 
